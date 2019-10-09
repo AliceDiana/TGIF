@@ -1,0 +1,56 @@
+header {
+  overflow: visible;
+}
+
+.logo {
+  width: 240px;
+  margin-left: -15px;
+}
+
+.email {
+  margin-top: 52px;
+}
+
+.far.fa-envelope {
+  margin-top: 57px;
+  padding-right: 5px;
+}
+.homepic {
+  margin-top: 116px;
+  margin-left: -22px;
+}
+
+a:hover {
+  background-color: lightgrey;
+  color: black;
+}
+
+.main {
+  margin-top: -9px;
+}
+
+p {
+  line-height: 30px;
+  text-indent: 30px;
+}
+
+footer {
+  height: 50px;
+  margin-bottom: 4px;
+}
+.copyright {
+  margin-top: -7px;
+}
+
+#more {
+  display: none;
+}
+
+button {
+  background-color: lightgray;
+  border: outset;
+  outline: none;
+  color: black;
+  font-size: 18px;
+  padding: 5px;
+}

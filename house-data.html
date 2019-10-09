@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <!-- FontAwesome -->
+    <script
+      src="https://kit.fontawesome.com/834fbbddb8.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class=" header header-expand-md sticky-top bg-white">
+        <div class="row d-flex justify-content-between py-2">
+          <div class="col-md-4 ">
+            <img
+              src="./logo.png"
+              class="img-fluid logo"
+              alt="Responsive image"
+            />
+          </div>
+          <div class="col-md-4 d-flex  justify-content-md-end">
+            <i class="far fa-envelope"></i>
+            <a class="email" href="mailto:info@tgif.net"> info@tgif.net</a>
+          </div>
+        </div>
+
+        <nav class="navbar navbar-expand-md  border border-dark  bg-light py-0">
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="index.html"
+                  >Home <span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Congress 113
+                </a>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <a class="dropdown-item" href="house-data.html">House</a>
+                  <a class="dropdown-item" href="senate-data.html">Senate</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div class="row py-5">
+          <div class="col-md-8 ">
+            <h2 class="font-italic">Congressmen</h2>
+            <p>
+              The major power of the House is to pass federal legislation that
+              affects the entire country, although its bills must also be passed
+              by the Senate and further agreed to by the U.S. President before
+              becoming law (unless both the House and Senate re-pass the
+              legislation with a two-thirds majority in each chamber). The House
+              has some exclusive powers: the power to initiate revenue bills, to
+              impeach officials (impeached officials are subsequently tried in
+              the Senate), and to elect the U.S. President in case there is no
+              majority in the Electoral College.
+            </p>
+            <p>
+              Each U.S. state is represented in the House in proportion to its
+              population as measured in the census, but every state is entitled
+              to at least one representative.
+            </p>
+          </div>
+        </div>
+        <div class="row py-2">
+          <div class="col-md-12 ">
+            <table
+              class="table table-responsive-md table-borderless table-hover "
+            >
+              <thead class="thead bg-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Party</th>
+                  <th>State</th>
+                  <th>Years in Office</th>
+                  <th>% Votes with Party</th>
+                </tr>
+              </thead>
+              <tbody id="house-data"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <!--Javascript-->
+      <script src="pro-congress-113-house.js"></script>
+      <script src="main-house.js"></script>
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"
+      ></script>
+    </div>
+  </body>
+  <div class="container">
+    <footer
+      class="footer-copyright  border border-dark text-center bg-light py-3"
+    >
+      <p class=" copyright font-italic">
+        © 2016 Copyright TGIF | All Rights Reserved
+      </p>
+    </footer>
+  </div>
+</html>
