@@ -72,6 +72,50 @@
                   <a class="dropdown-item" href="senate-data.html">Senate</a>
                 </div>
               </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Attendance
+                </a>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <a class="dropdown-item" href="attendance-house.html"
+                    >House</a
+                  >
+                  <a class="dropdown-item" href="attendance-senate.html"
+                    >Senate</a
+                  >
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Party Loyalty
+                </a>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <a class="dropdown-item" href="house-loyalty.html">House</a>
+                  <a class="dropdown-item" href="senate-loyalty.html">Senate</a>
+                </div>
+              </li>
             </ul>
           </div>
         </nav>
@@ -98,23 +142,66 @@
             </p>
           </div>
         </div>
-        <div class="row py-2">
-          <div class="col-md-12 ">
-            <table
-              class="table table-responsive-md table-borderless table-hover "
-            >
-              <thead class="thead bg-light">
-                <tr>
-                  <th>Name</th>
-                  <th>Party</th>
-                  <th>State</th>
-                  <th>Years in Office</th>
-                  <th>% Votes with Party</th>
-                </tr>
-              </thead>
-              <tbody id="house-data"></tbody>
-            </table>
+        <div class="row py-2 filterInput">
+          <div class="col-md-7 ">
+            <p>
+              Filter by party:
+              <label for="Republicans">
+                Republicans
+                <input
+                  class="party-checkbox"
+                  checked
+                  type="checkbox"
+                  id="Republicans"
+                  value="R"
+                />
+              </label>
+              <label for="Democrats">
+                Democrats
+                <input
+                  class="party-checkbox"
+                  checked
+                  type="checkbox"
+                  id="Democrats"
+                  value="D"
+                />
+              </label>
+              <label for="Independents">
+                Independents
+                <input
+                  class="party-checkbox"
+                  checked
+                  type="checkbox"
+                  id="Independents"
+                  value="I"
+              /></label>
+            </p>
           </div>
+
+          <div class=" col-md-5 filterDropdown">
+            <label for="countries">
+              Filter by State:
+              <select class="dropdownmenu" id="countries" name="countries">
+                <option> All</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="row py-2 filterInput">
+          <table
+            class="table table-responsive-md table-borderless table-hover "
+          >
+            <thead class="thead bg-light">
+              <tr>
+                <th>Name</th>
+                <th>Party</th>
+                <th>State</th>
+                <th>Years in Office</th>
+                <th>% Votes with Party</th>
+              </tr>
+            </thead>
+            <tbody id="house-data"></tbody>
+          </table>
         </div>
       </main>
       <footer
@@ -126,7 +213,7 @@
       </footer>
 
       <!--Javascript-->
-      <script src="pro-congress-113-house.js"></script>
+      <script src="pro-Congress-house.js"></script>
       <script src="main-house.js"></script>
       <script
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

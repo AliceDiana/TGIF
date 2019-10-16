@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home</title>
+    <title>Attendance_senate</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -121,94 +121,91 @@
 
       <main>
         <div class="row d-flex justify-content-between py-5">
-          <div class="col-md-8 ">
-            <h2 class="font-italic">About Us</h2>
+          <div class="col-md-7 ">
+            <h2 class="font-italic">Attendance</h2>
             <p>
-              Openness, accountability, and honesty define government
-              transparency. In a free society, transparency is government's
-              obligation to share information with citizens. It is at the heart
-              of how citizens hold their public officials accountable. Here at
-              TGIF we believe that government should be transparent.
+              The Constitution specifies that a majority of members constitutes
+              a quorum to do business in each house. Representatives and
+              senators rarely force the presence of a quorum by demanding quorum
+              calls; thus, in most cases, debates continue even if a majority is
+              not present.
             </p>
+
             <p>
-              Governments exist to serve the people. Information on how
-              officials conduct the public business and spend taxpayer money
-              must be readily available and easily understood. This transparency
-              allows good and just governance. Transparency promotes
-              accountability and provides information for citizens about what
-              their Government is doing.
+              The Senate uses roll-call votes; a clerk calls out the names of
+              all the senators, each senator stating "aye" or "no" when his or
+              her name is announced. The House reserves roll-call votes for the
+              most formal matters, as a roll-call of all 435 representatives
+              takes quite some time; normally, members vote by electronic
+              device. In the case of a tie, the motion in question fails. In the
+              Senate, the Vice President may (if present) cast the tiebreaking
+              vote.
             </p>
-            <p>
-              We also believe that government should be participatory. Public
-              engagement enhances the Government's effectiveness and improves
-              the quality of its decisions. Knowledge is widely dispersed in
-              society, and public officials benefit from having access to that
-              dispersed knowledge. We invite you to use our site to become
-              actively engaged in American government.
-            </p>
-            <p>
-              TGIF works to disclose information in forms that the public can
-              readily find and use. We solicit public feedback to identify
-              information of greatest use to the public.
-            </p>
-            <!-- <span id="dots"></span> -->
-            <div id="more">
-              <h3>Background History of Government Transparency</h3>
-              <p>
-                In the West, the idea that government should be open to public
-                scrutiny and susceptible to public opinion dates back at least
-                to the time of the Enlightenment, when many philosophes made an
-                attack on absolutist doctrine of state secrecy, a core part of
-                their intellectual project.
-              </p>
-              <p>
-                The passage of formal legislative instruments to this end can
-                also be traced to this time with Sweden, for example, (which
-                then included Finland as a Swedish-governed territory) enacting
-                free press legislation as part of its constitution (Freedom of
-                the Press Act, 1766). This approach, and that of the philosophes
-                more broadly, is strongly related to recent historiography on
-                the eighteenth-century public sphere.
-              </p>
-
-              <p>
-                Influenced by Enlightenment thought, the revolutions in America
-                (1776) and France (1789), freedom of the press enshrined
-                provisions and requirements for public budgetary accounting and
-                freedom of the press in constitutional articles. In the
-                nineteenth century, attempts by Metternichean statesmen to row
-                back on these measures were vigorously opposed by a number of
-                eminent liberal politicians and writers, Bentham, Mill and Acton
-                prominent among the latter.
-              </p>
-
-              <p>
-                Open government is widely seen to be a key hallmark of
-                contemporary democratic practice and is often linked to the
-                passing of freedom of information legislation. Scandinavian
-                countries claim to have adopted the first freedom of information
-                legislation, dating the origins of its modern provisions to the
-                eighteenth century and Finland continuing the presumption of
-                openness after gaining independence in 1917, passing its Act on
-                Publicity of Official Documents in 1951 (superseded by new
-                legislation in 1999).
-              </p>
-
-              <p>
-                The United States passed its Freedom of Information Act (FOIA)
-                in 1966, FOIAs, Access to Information Acts (AIAs) or equivalent
-                laws were passed in Denmark and Norway in 1970.
-              </p>
-            </div>
-
-            <button type="button" id="read" onclick="read()">Read more</button>
           </div>
-          <div class="col-md-3">
-            <img
-              src="./congress.jpg"
-              class="homepic img-fluid rounded-circle"
-              alt="Responsive"
-            />
+          <div class="col-md-5 ">
+            <h4 class="font-italic text-right">Senate at a glance</h4>
+            <table class="table table-responsive-md table-border table-hover">
+              <thead class="bg-light">
+                <tr>
+                  <th>Party</th>
+                  <th>Number of Reps</th>
+                  <th>% Voted with Party</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Democrats</td>
+                  <td id="sd"></td>
+                  <td id="vd"></td>
+                </tr>
+                <tr>
+                  <td>Republicans</td>
+                  <td id="sr"></td>
+                  <td id="vr"></td>
+                </tr>
+                <tr>
+                  <td>Independents</td>
+                  <td id="si"></td>
+                  <td id="vi"></td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td id="st"></td>
+                  <td id="vt"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="row d-flex justify-content-between py-5">
+          <div class="col-md-5.5 ">
+            <h3 class="font-italic">Least Engaged (Bottom 10% Attendance)</h3>
+            <table class="table table-responsive-md table-border table-hover">
+              <thead class="thead bg-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Number of Missed Votes</th>
+                  <th>% Missed</th>
+                </tr>
+              </thead>
+              <tbody id="lessengaged"></tbody>
+            </table>
+          </div>
+          <div class="col-md-5.5 ">
+            <h3 class="font-italic">Most Engaged (Top 10% Attendance)</h3>
+            <table class="table table-responsive-md table-border table-hover">
+              <thead class="thead bg-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Number of Missed Votes</th>
+                  <th>% Missed</th>
+                </tr>
+              </thead>
+              <tbody id="mostengaged"></tbody>
+            </table>
           </div>
         </div>
       </main>
@@ -239,6 +236,8 @@
     ></script>
 
     <!--Javascript-->
-    <script src="index.js"></script>
+
+    <script src="pro-Congress-senate.js"></script>
+    <script src="attendance-senate.js"></script>
   </body>
 </html>
