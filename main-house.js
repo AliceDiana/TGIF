@@ -1,4 +1,45 @@
-let members = data.results[0].members;
+let membersArray = [];
+
+loaderShow();
+
+fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "iUvnlxO3YZhcfijhBrBHJoe2QlC3BLkN4bVMJixG"
+  }
+})
+  .then(response => {
+    //catch response of the server
+    if (response.ok) {
+      return response.json(); //transform the response from server into json
+    }
+    throw new Error(response.statusText);
+  })
+
+  .then(data => {
+    membersArray = data.results[0].members;
+    init();
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+function init() {
+  loaderHide();
+  generateTable(membersArray);
+  dropdownfilter(membersArray);
+  changecountry();
+}
+
+function loaderShow() {
+  document.querySelector("main").style.display = "none";
+  document.getElementById("spinner");
+}
+
+function loaderHide() {
+  document.querySelector("main").style.display = "block";
+  document.getElementById("spinner").style.display = "none";
+}
 
 function generateTable(membersArray) {
   var tbody = document.getElementById("house-data");
@@ -20,58 +61,102 @@ function generateTable(membersArray) {
     years.innerHTML = membersArray[i].seniority;
     votes.innerHTML = membersArray[i].votes_with_party_pct + "%";
     row.setAttribute("data-party", membersArray[i].party);
+    row.setAttribute("data-state", membersArray[i].state);
     row.append(name, party, state, years, votes);
     tbody.append(row);
   }
 }
 
-generateTable(members);
+function filterItems(itemsToFilter) {
+  // checkboxes to filter per party
 
-// checkboxes to filter per party
+  let checkBoxes = document.querySelectorAll("input.party-checkbox");
+  let checkboxDemocrat = document.getElementById("Democrats");
+  let checkboxRepublicans = document.getElementById("Republicans");
+  let checkboxIndependents = document.getElementById("Independents");
 
-var itemsToFilter = document.querySelectorAll("[data-party]"); //  I get all of our list items
-var checkBoxes = document.querySelectorAll("input.party-checkbox"); //setup click event handlers on checkboxes
+  checkboxRepublicans.addEventListener("click", changecountry); //i link the chckboxes to my primary function
+  checkboxDemocrat.addEventListener("click", changecountry); //  (it is like a chain, I have to link the filters to the primary function, and the second function to the primary function)
+  checkboxIndependents.addEventListener("click", changecountry);
 
-let checkboxDemocrat = document.getElementById("Democrats");
-let checkboxRepublicans = document.getElementById("Republicans");
-let checkboxIndependents = document.getElementById("Independents");
-
-checkboxRepublicans.addEventListener("click", filterItems);
-checkboxDemocrat.addEventListener("click", filterItems);
-checkboxIndependents.addEventListener("click", filterItems);
-
-function filterItems() {
   for (var i = 0; i < itemsToFilter.length; i++) {
+    itemsToFilter[i].style.display = "none"; // i start not displaying results
+
     if (
-      !checkboxRepublicans.checked &&
-      itemsToFilter[i].getAttribute("data-party") == "R"
-    ) {
-      itemsToFilter[i].style.display = "none";
-    } else if (
-      checkboxRepublicans.checked &&
+      checkboxRepublicans.checked && // if checkbox R is checkd, I want to display R
       itemsToFilter[i].getAttribute("data-party") == "R"
     ) {
       itemsToFilter[i].style.display = "table-row";
-    } else if (
-      !checkboxDemocrat.checked &&
-      itemsToFilter[i].getAttribute("data-party") == "D"
-    ) {
-      itemsToFilter[i].style.display = "none";
-    } else if (
+    }
+    if (
       checkboxDemocrat.checked &&
       itemsToFilter[i].getAttribute("data-party") == "D"
     ) {
       itemsToFilter[i].style.display = "table-row";
-    } else if (
-      !checkboxIndependents.checked &&
-      itemsToFilter[i].getAttribute("data-party") == "I"
-    ) {
-      itemsToFilter[i].style.display = "none";
-    } else if (
+    }
+    if (
       checkboxIndependents.checked &&
       itemsToFilter[i].getAttribute("data-party") == "I"
     ) {
       itemsToFilter[i].style.display = "table-row";
     }
+
+    if (
+      !checkboxRepublicans.checked &&
+      !checkboxDemocrat.checked &&
+      checkboxIndependents.checked
+    ) {
+      document.write("No results match your search").style.display =
+        "table-row";
+    }
   }
+}
+
+// I build my  State dropdown
+
+// I build my dropdown in HTMl
+
+function dropdownfilter(members) {
+  let countryList = []; // new array to be populated with loop results
+
+  for (let i = 0; i < members.length; i++) {
+    countryList.push(members[i].state);
+  } // with the push I populate the countryList with my results
+
+  let uniqueCountryArray = [...new Set(countryList)].sort(); // with Set I get a new Array of unique values
+  console.log(uniqueCountryArray); // with [...] I create a new array which is acceoted by js and I copy the array content into the new one
+
+  let select = document.getElementById("countrydropdown");
+
+  for (i = 0; i < uniqueCountryArray.length; i++) {
+    let option = document.createElement("option");
+
+    option.setAttribute("value", uniqueCountryArray[i]);
+    option.innerHTML = uniqueCountryArray[i];
+
+    select.appendChild(option);
+  }
+}
+
+// connect the dropdown list with the table to filter by country
+
+function changecountry() {
+  let filterdropdown = document.getElementById("countrydropdown"); //define dropdown list
+  let tabletofilter = document.querySelectorAll("[data-state]"); //
+  filterdropdown.addEventListener("change", changecountry); // add change event to  the dropdown filter
+
+  let stateList = [];
+
+  for (var i = 0; i < tabletofilter.length; i++) {
+    if (countrydropdown.value === tabletofilter[i].getAttribute("data-state")) {
+      //if the value changed on the dropdown equals the value of the table raw, push the list into the new array. I push everything not just the data-state value, so later the other function can also fin the party value to compare
+
+      stateList.push(tabletofilter[i]);
+    } else if (countrydropdown.value === "all") {
+      stateList.push(tabletofilter[i]);
+    } else {
+      tabletofilter[i].style.display = "none"; // if the value are not === to value or All, then do not display them
+    }
+  }
+  filterItems(stateList); // i call the secondary function inside the primary one to connect them
 }

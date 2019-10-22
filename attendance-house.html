@@ -28,8 +28,8 @@
 
   <body>
     <div class="container">
-      <header class="header header-expand-md sticky-top bg-white">
-        <div class="row d-flex justify-content-between py-2 sticky-top">
+      <header class="header header-expand-md  bg-white">
+        <div class="row d-flex justify-content-between py-2 ">
           <div class="col-md-4 ">
             <img
               src="./logo.png"
@@ -118,8 +118,11 @@
           </div>
         </nav>
       </header>
+      <div id="spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
 
-      <main>
+      <main class="onload">
         <div class="row d-flex justify-content-between py-5">
           <div class="col-md-7 ">
             <h2 class="font-italic">Attendance</h2>
@@ -181,8 +184,10 @@
         <hr />
 
         <div class="row d-flex justify-content-between py-5">
-          <div class="col-md-5.5 ">
-            <h3 class="font-italic">Least Engaged (Bottom 10% Attendance)</h3>
+          <div class="col-md-4.5">
+            <h4 class="font-italic text-right">
+              Least Engaged (Bottom 10% Attendance)
+            </h4>
             <table class="table table-responsive-md table-border table-hover">
               <thead class="thead bg-light">
                 <tr>
@@ -194,8 +199,10 @@
               <tbody id="lessengaged"></tbody>
             </table>
           </div>
-          <div class="col-md-5.5 ">
-            <h3 class="font-italic">Most Engaged (Top 10% Attendance)</h3>
+          <div class="col-md-4.5 ">
+            <h4 class="font-italic text-right">
+              Most Engaged (Top 10% Attendance)
+            </h4>
             <table class="table table-responsive-md table-border table-hover">
               <thead class="thead bg-light">
                 <tr>
@@ -210,7 +217,7 @@
         </div>
       </main>
       <footer
-        class="container footer-copyright border border-dark  text-center  bg-light py-3"
+        class="container footer-copyright border border-dark  fixed-bottom text-center  bg-light py-3"
       >
         <p class=" copyright font-italic">
           © 2016 Copyright TGIF | All Rights Reserved
@@ -235,7 +242,7 @@
     ></script>
 
     <!--Javascript-->
-    <script src="pro-Congress-house.js"></script>
+    <!-- <script src="pro-Congress-house.js"></script> -->
     <script src="attendance-house.js"></script>
   </body>
 </html>

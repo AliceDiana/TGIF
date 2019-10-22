@@ -1,33 +1,10 @@
-let membersArray = data.results[0].members;
-
-//code to get the number of members of each party
-
+let membersArray = [];
 let statistics = {
   Democrats: 0,
   Republicans: 0,
   Independents: 0,
   Total: 0
 };
-
-for (var i = 0; i < membersArray.length; i++) {
-  if (membersArray[i].party === "R") {
-    //get the number of members in Rep party
-    statistics.Republicans++;
-  } else if (membersArray[i].party === "D") {
-    //get the number of members in Democrat party
-    statistics.Democrats++;
-  } else {
-    //get the number of members in Independent party
-    statistics.Independents++;
-  }
-}
-
-statistics.Total =
-  statistics.Republicans + statistics.Democrats + statistics.Independents;
-
-console.log(statistics);
-
-// code to get the totale of vote % for each party
 
 let sumOfPercentage = {
   Democrats: 0,
@@ -36,80 +13,144 @@ let sumOfPercentage = {
   Total: 0
 };
 
-for (var i = 0; i < membersArray.length; i++) {
-  if (membersArray[i].party === "R") {
-    //get the sum of % in Democrat party
-    sumOfPercentage.Republicans += membersArray[i].votes_with_party_pct;
-  } else if (membersArray[i].party === "D") {
-    //get the sum of % members in Democrat party
-    sumOfPercentage.Democrats += membersArray[i].votes_with_party_pct;
-  } else {
-    //get the sum of % in Democrat party
-    sumOfPercentage.Independents += membersArray[i].votes_with_party_pct;
+let averageRepublicans = [];
+let averageDemocrats = [];
+let averageTotal = [];
+let averageIndependent = 0;
+loaderShow();
+
+fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "iUvnlxO3YZhcfijhBrBHJoe2QlC3BLkN4bVMJixG"
   }
+})
+  .then(response => {
+    //catch response of the server
+    if (response.ok) {
+      return response.json(); //transform the response from server into json
+    }
+    throw new Error(response.statusText);
+  })
+
+  .then(data => {
+    membersArray = data.results[0].members;
+    init();
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+function init() {
+  loaderHide();
+  partyMembers();
+  totalPercentage();
+  averagePercentage();
+  tableAtGlance();
+  topResults();
+  generateTable();
+  bottomResults();
+  generateTable2();
 }
-console.log(sumOfPercentage.Independents);
 
-sumOfPercentage.Total =
-  sumOfPercentage.Republicans +
-  sumOfPercentage.Democrats +
-  sumOfPercentage.Independents;
+function loaderShow() {
+  document.querySelector("main").style.display = "none";
+  document.getElementById("spinner");
+}
 
-// code to get the averge of vote % for each party
+function loaderHide() {
+  document.getElementById("spinner").style.display = "none";
 
-var averageRepublicans = sumOfPercentage.Republicans / statistics.Republicans;
-var averageDemocrats = sumOfPercentage.Democrats / statistics.Democrats;
-var averageTotal = sumOfPercentage.Total / statistics.Total;
-var averageIndependent = 0;
+  document.querySelector("main").style.display = "block";
+}
 
-console.log("The average vote of Republicans is:" + averageRepublicans + "%");
+function partyMembers() {
+  //code to get the number of members of each party
 
-// create the Senate glance table - ids to fill cell content
+  for (var i = 0; i < membersArray.length; i++) {
+    if (membersArray[i].party === "R") {
+      //get the number of members in Rep party
+      statistics.Republicans++;
+    } else if (membersArray[i].party === "D") {
+      //get the number of members in Democrat party
+      statistics.Democrats++;
+    } else {
+      //get the number of members in Independent party
+      statistics.Independents++;
+    }
+  }
+  statistics.Total = // code to get the totale of vote % for each party
+    statistics.Republicans + statistics.Democrats + statistics.Independents;
+}
 
-document.getElementById("sr").innerHTML = statistics.Republicans;
-document.getElementById("sd").innerHTML = statistics.Democrats;
-document.getElementById("si").innerHTML = statistics.Independents;
-document.getElementById("st").innerHTML = statistics.Total;
+function totalPercentage() {
+  // code to get the totale of vote % for each party
 
-document.getElementById("vr").innerHTML = averageRepublicans;
-document.getElementById("vd").innerHTML = averageDemocrats;
-document.getElementById("vi").innerHTML = 0;
-document.getElementById("vt").innerHTML = averageTotal;
+  for (var i = 0; i < membersArray.length; i++) {
+    if (membersArray[i].party === "R") {
+      //get the sum of % in Democrat party
+      sumOfPercentage.Republicans += membersArray[i].votes_with_party_pct;
+    } else if (membersArray[i].party === "D") {
+      //get the sum of % members in Democrat party
+      sumOfPercentage.Democrats += membersArray[i].votes_with_party_pct;
+    } else {
+      //get the sum of % in Democrat party
+      sumOfPercentage.Independents += membersArray[i].votes_with_party_pct;
+    }
+  }
+  sumOfPercentage.Total =
+    sumOfPercentage.Republicans +
+    sumOfPercentage.Democrats +
+    sumOfPercentage.Independents;
+}
 
-// Most Engaged (Top 10% Attendance)
+function averagePercentage() {
+  // find average percentage
+  averageRepublicans.push(sumOfPercentage.Republicans / statistics.Republicans);
+  averageDemocrats.push(sumOfPercentage.Democrats / statistics.Democrats);
+  averageTotal.push(sumOfPercentage.Total / statistics.Total);
+  averageIndependent = 0;
+}
 
-//function to sort array from min to max missed vote %
+function tableAtGlance() {
+  // create the Senate glance table - ids to fill cell content
+  document.getElementById("sr").innerHTML = statistics.Republicans;
+  document.getElementById("sd").innerHTML = statistics.Democrats;
+  document.getElementById("si").innerHTML = statistics.Independents;
+  document.getElementById("st").innerHTML = statistics.Total;
 
-var sortedList = membersArray.sort(function(a, b) {
-  return a.missed_votes_pct - b.missed_votes_pct;
-});
-
-// console.log(sortedList);
-
-//function to select top 10% most engaged
-
-let tenPercentage = Math.round((sortedList.length * 10) / 100);
-
-console.log(tenPercentage);
+  document.getElementById("vr").innerHTML = averageRepublicans;
+  document.getElementById("vd").innerHTML = averageDemocrats;
+  document.getElementById("vi").innerHTML = 0;
+  document.getElementById("vt").innerHTML = averageTotal;
+}
 
 let top10most = []; // i have to put an array as its like a box to populate
-for (let i = 0; i < sortedList.length; i++) {
-  if (i < tenPercentage) {
-    top10most.push(sortedList[i]); // with the push I populate the top10least with my results
-  } else if (
-    top10most[top10most.length - 1].missed_votes_pct == // i want to compare the last one of the top10 with the followin one to check if its a duplicate
-    sortedList[i].missed_votes_pct
-  ) {
-    top10most.push(sortedList[i]);
-  } else {
-    break; // once it find duplicate the loop has to stop running
+
+function topResults() {
+  let sortedList = membersArray.sort(function(a, b) {
+    return a.missed_votes_pct - b.missed_votes_pct;
+  });
+
+  let tenPercentage = Math.round((sortedList.length * 10) / 100);
+
+  for (let i = 0; i < sortedList.length; i++) {
+    //function to sort array from min to max missed vote %
+
+    if (i < tenPercentage) {
+      top10most.push(sortedList[i]); // with the push I populate the top10least with my results
+    } else if (
+      top10most[top10most.length - 1].missed_votes_pct == // i want to compare the last one of the top10 with the followin one to check if its a duplicate
+      sortedList[i].missed_votes_pct
+    ) {
+      top10most.push(sortedList[i]);
+    } else {
+      break; // once it find duplicate the loop has to stop running
+    }
   }
 }
-console.log(top10most);
 
-// function to generate table
-
-function generateTable(top10most) {
+function generateTable() {
   var tbody = document.getElementById("mostengaged");
 
   for (var i = 0; i < top10most.length; i++) {
@@ -129,29 +170,32 @@ function generateTable(top10most) {
     tbody.append(row);
   }
 }
-generateTable(top10most);
-
-// Less Engaged (Top 10% Attendance)
-
-var reversedList = sortedList.reverse();
-console.log(reversedList);
 
 let top10less = []; // i have to put an array as its like a box to populate
-for (let i = 0; i < reversedList.length; i++) {
-  if (i < tenPercentage) {
-    top10less.push(reversedList[i]); // with the push I populate the top10least with my results
-  } else if (
-    top10less[top10less.length - 1].missed_votes_pct == // i want to compare the last one of the top10 with the followin one to check if its a duplicate
-    reversedList[i].missed_votes_pct
-  ) {
-    top10less.push(reversedList[i]);
-  } else {
-    break; // once it find duplicate the loop has to stop running
+
+function bottomResults() {
+  let sortedList = membersArray.sort(function(a, b) {
+    return a.missed_votes_pct - b.missed_votes_pct;
+  });
+  let reversedList = sortedList.reverse();
+
+  let tenPercentage = Math.round((sortedList.length * 10) / 100);
+
+  for (let i = 0; i < reversedList.length; i++) {
+    if (i < tenPercentage) {
+      top10less.push(reversedList[i]); // with the push I populate the top10least with my results
+    } else if (
+      top10less[top10less.length - 1].missed_votes_pct == // i want to compare the last one of the top10 with the followin one to check if its a duplicate
+      reversedList[i].missed_votes_pct
+    ) {
+      top10less.push(reversedList[i]);
+    } else {
+      break; // once it find duplicate the loop has to stop running
+    }
   }
 }
-console.log(top10less);
 
-function generateTable2(top10less) {
+function generateTable2() {
   var tbody = document.getElementById("lessengaged");
 
   for (var i = 0; i < top10less.length; i++) {
@@ -171,4 +215,3 @@ function generateTable2(top10less) {
     tbody.append(row);
   }
 }
-generateTable2(top10less);

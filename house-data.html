@@ -29,7 +29,7 @@
 
   <body>
     <div class="container">
-      <header class=" header header-expand-md sticky-top bg-white">
+      <header class=" header header-expand-md  bg-white">
         <div class="row d-flex justify-content-between py-2">
           <div class="col-md-4 ">
             <img
@@ -120,7 +120,10 @@
           </div>
         </nav>
       </header>
-      <main>
+      <div  id="spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+      <main class="onload">
         <div class="row py-5">
           <div class="col-md-8 ">
             <h2 class="font-italic">Congressmen</h2>
@@ -143,7 +146,7 @@
           </div>
         </div>
         <div class="row py-2 filterInput">
-          <div class="col-md-7 ">
+          <div class="col-md-7  d-flex justify-content-start ">
             <p>
               Filter by party:
               <label for="Republicans">
@@ -177,16 +180,20 @@
               /></label>
             </p>
           </div>
-
-          <div class=" col-md-5 filterDropdown">
+          <div class=" col-md-5 d-flex justify-content-end filterDropdown">
             <label for="countries">
               Filter by State:
-              <select class="dropdownmenu" id="countries" name="countries">
-                <option> All</option>
+              <select
+                class="dropdownmenu"
+                id="countrydropdown"
+                name="countries"
+              >
+                <option value="all">ALL</option>
               </select>
             </label>
           </div>
         </div>
+
         <div class="row py-2 filterInput">
           <table
             class="table table-responsive-md table-borderless table-hover "
@@ -205,7 +212,7 @@
         </div>
       </main>
       <footer
-        class=" container footer-copyright  border border-dark text-center bg-light py-3"
+        class=" container footer-copyright  fixed-bottom border border-dark text-center bg-light py-3"
       >
         <p class=" copyright font-italic">
           © 2016 Copyright TGIF | All Rights Reserved

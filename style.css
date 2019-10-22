@@ -25,15 +25,14 @@ a:hover {
   color: black;
 }
 
-.main {
-  margin-top: -9px;
-}
-
 p {
   line-height: 30px;
   text-indent: 30px;
 }
 
+main {
+  margin-bottom: 200px;
+}
 footer {
   height: 50px;
   margin-bottom: 4px;
@@ -53,4 +52,13 @@ button {
   color: black;
   font-size: 18px;
   padding: 5px;
+}
+
+.fas.fa-spinner {
+  position: fixed;
+  z-index: 99;
+  top: 300px;
+  left: 650px;
+  font-size: 100px;
+  background-color: white;
 }
