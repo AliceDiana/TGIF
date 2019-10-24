@@ -46,7 +46,7 @@ fetch(url, {
 
   .then(data => {
     // I get the data I need
-    membersArray = data.results[0].members; // I give the directions on how to acess the specific member array
+    membersArray = data.results[0].members; // I give the directions on how to access the specific member array
     init(); // I call the init, which basically is linked the init function
   })
   .catch(error => {
@@ -68,7 +68,7 @@ function init() {
 }
 
 function loaderShow() {
-  document.querySelector("main").style.display = "none"; //I select my main conten, and I want to hide it while the loader is on
+  document.querySelector("main").style.display = "none"; //I select my main content, and I want to hide it while the loader is on
   document.getElementById("spinner"); // I want the loader to appear
 }
 
@@ -119,7 +119,7 @@ function totalPercentage() {
 function averagePercentage() {
   // find average percentage
 
-  averageRepublicans = sumOfPercentage.Republicans / statistics.Republicans; // for the republicans, the average vote% is equal to the total percenage for Republicans / the number of republican members
+  averageRepublicans = sumOfPercentage.Republicans / statistics.Republicans; // for the republicans, the average vote% is equal to the total percentage for Republicans / the number of republican members
   averageDemocrats = sumOfPercentage.Democrats / statistics.Democrats;
   averageTotal = sumOfPercentage.Total / statistics.Total;
   averageIndependent = 0;
@@ -148,7 +148,7 @@ function generateTable(top10list, tbody) {
     let missed_votes_pct = document.createElement("td");
 
     name.innerHTML = `<a href= "${top10list[i].url}" target= "_blank"> ${
-      // I use ${} to link the respective url to the memebers
+      // I use ${} to link the respective url to the members
       top10list[i].last_name
     }, ${top10list[i].first_name} ${top10list[i].middle_name || " "}</a>`;
     // ||  means that if there is no middle name display empty
@@ -168,7 +168,7 @@ function mostEngaged() {
     return a.missed_votes_pct - b.missed_votes_pct;
   });
 
-  let tenPercentage = Math.round((sortedList.length * 10) / 100); // I define the 10% of my aray
+  let tenPercentage = Math.round((sortedList.length * 10) / 100); // I define the 10% of my array
 
   for (let i = 0; i < sortedList.length; i++) {
     if (i < tenPercentage) {

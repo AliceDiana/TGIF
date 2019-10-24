@@ -2,7 +2,7 @@ var i = 0; //the variable is set to zero paragraph
 
 function read() {
   if (!i) {
-    //if paragrapgh not equal to zero
+    //if paragraph not equal to zero
 
     document.getElementById("more").style.display = "inline";
 

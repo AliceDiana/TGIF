@@ -85,7 +85,7 @@ function filterItems(itemsToFilter) {
   let checkboxRepublicans = document.getElementById("Republicans");
   let checkboxIndependents = document.getElementById("Independents");
 
-  checkboxRepublicans.addEventListener("click", changecountry); // i link the chckboxes to my primary function,  (it is like a chain, I have to link the filters to the primary function, and the second function to the primary function)
+  checkboxRepublicans.addEventListener("click", changecountry); // i link the checkboxes to my primary function,  (it is like a chain, I have to link the filters to the primary function, and the second function to the primary function)
   checkboxDemocrat.addEventListener("click", changecountry);
   checkboxIndependents.addEventListener("click", changecountry);
 
@@ -93,7 +93,7 @@ function filterItems(itemsToFilter) {
     itemsToFilter[i].style.display = "none"; // i start not displaying results
 
     if (
-      checkboxRepublicans.checked && // if checkbox R is checkd, I want to display R in  a table row
+      checkboxRepublicans.checked && // if checkbox R is checked, I want to display R in a table row
       itemsToFilter[i].getAttribute("data-party") == "R"
     ) {
       itemsToFilter[i].style.display = "table-row";
@@ -122,7 +122,7 @@ function dropdownfilter(members) {
   } // with the push I populate the countryList with my results
 
   let uniqueCountryArray = [...new Set(countryList)].sort(); // with Set I get a new Array of unique values
-  // with [...] I create a new array which is acceoted by js and I copy the array content into the new one
+  // with [...] I create a new array which is accepted by js and I copy the array content into the new one
 
   // I build my dropdown in HTMl
   let select = document.getElementById("countrydropdown");
