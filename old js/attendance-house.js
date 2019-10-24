@@ -1,4 +1,5 @@
 let membersArray = [];
+
 let statistics = {
   Democrats: 0,
   Republicans: 0,
@@ -17,9 +18,10 @@ let averageRepublicans = [];
 let averageDemocrats = [];
 let averageTotal = [];
 let averageIndependent = 0;
+
 loaderShow();
 
-fetch("https://api.propublica.org/congress/v1/113/senate/members.json", {
+fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
   method: "GET",
   headers: {
     "X-API-Key": "iUvnlxO3YZhcfijhBrBHJoe2QlC3BLkN4bVMJixG"
@@ -35,6 +37,7 @@ fetch("https://api.propublica.org/congress/v1/113/senate/members.json", {
 
   .then(data => {
     membersArray = data.results[0].members;
+
     init();
   })
   .catch(error => {
@@ -47,10 +50,10 @@ function init() {
   totalPercentage();
   averagePercentage();
   tableAtGlance();
-  mostEngaged();
-  generateTable();
-  leastEngaged();
-  generateTable2();
+  topResults();
+  generateTable(top10most, tableMostPosition);
+  bottomResults();
+  generateTable(top10less, tableLessPosition);
 }
 
 function loaderShow() {
@@ -125,9 +128,33 @@ function tableAtGlance() {
   document.getElementById("vt").innerHTML = averageTotal;
 }
 
+const tableMostPosition = document.getElementById("mostengaged"); // this data need to populate the mostengaged section on HTML
+const tableLessPosition = document.getElementById("lessengaged"); // this data need to populate the lessengaged section on HTML
+
+function generateTable(top10list, tbody) {
+  // the generateTable function creates the HTML table
+  for (var i = 0; i < top10list.length; i++) {
+    let row = document.createElement("tr");
+    let name = document.createElement("td");
+    let missed_votes = document.createElement("td");
+    let missed_votes_pct = document.createElement("td");
+
+    name.innerHTML = `<a href= "${top10list[i].url}" target= "_blank"> ${
+      top10list[i].last_name
+    }, ${top10list[i].first_name} ${top10list[i].middle_name || " "}</a>`;
+    // || if there is no middle name display empty
+    missed_votes.innerHTML = top10list[i].missed_votes;
+    missed_votes_pct.innerHTML = top10list[i].missed_votes_pct + "%";
+
+    row.append(name, missed_votes, missed_votes_pct);
+    tbody.append(row);
+  }
+}
+
+let top10less = []; // i have to put an array as its like a box to populate
 let top10most = []; // i have to put an array as its like a box to populate
 
-function mostEngaged() {
+function topResults() {
   let sortedList = membersArray.sort(function(a, b) {
     return a.missed_votes_pct - b.missed_votes_pct;
   });
@@ -135,6 +162,8 @@ function mostEngaged() {
   let tenPercentage = Math.round((sortedList.length * 10) / 100);
 
   for (let i = 0; i < sortedList.length; i++) {
+    //function to sort array from min to max missed vote %
+
     if (i < tenPercentage) {
       top10most.push(sortedList[i]); // with the push I populate the top10least with my results
     } else if (
@@ -148,35 +177,12 @@ function mostEngaged() {
   }
 }
 
-function generateTable() {
-  var tbody = document.getElementById("mostengaged");
-
-  for (var i = 0; i < top10most.length; i++) {
-    let row = document.createElement("tr");
-    let name = document.createElement("td");
-    let missed_votes = document.createElement("td");
-    let missed_votes_pct = document.createElement("td");
-
-    name.innerHTML = `<a href= "${top10most[i].url}" target= "_blank"> ${
-      top10most[i].last_name
-    }, ${top10most[i].first_name} ${top10most[i].middle_name || " "}</a>`;
-    // || if there is no middle name display empty
-    missed_votes.innerHTML = top10most[i].missed_votes;
-    missed_votes_pct.innerHTML = top10most[i].missed_votes_pct + "%";
-
-    row.append(name, missed_votes, missed_votes_pct);
-    tbody.append(row);
-  }
-}
-
-let top10less = []; // i have to put an array as its like a box to populate
-
-function leastEngaged() {
+function bottomResults() {
   let sortedList = membersArray.sort(function(a, b) {
     return a.missed_votes_pct - b.missed_votes_pct;
   });
-
   let reversedList = sortedList.reverse();
+
   let tenPercentage = Math.round((sortedList.length * 10) / 100);
 
   for (let i = 0; i < reversedList.length; i++) {
@@ -193,23 +199,32 @@ function leastEngaged() {
   }
 }
 
-function generateTable2() {
-  var tbody = document.getElementById("lessengaged");
+// OLD COMBINED FUNCTON FOR BOTH SORTED AND REVERSED --NOT WORKING
+// function Results(x, y, top10array, tbody) {
+//   let sortedList = membersArray.sort(function(a, b) {
+//     if (a.missed_votes_pct > b.missed_votes_pct) return 1;
 
-  for (var i = 0; i < top10less.length; i++) {
-    let row = document.createElement("tr");
-    let name = document.createElement("td");
-    let missed_votes = document.createElement("td");
-    let missed_votes_pct = document.createElement("td");
+//     if (a.missed_votes_pct < b.missed_votes_pct) return -1;
+//     else {
+//       return 0;
+//     }
+//   });
+//   console.log(sortedList);
 
-    name.innerHTML = `<a href= "${top10less[i].url}" target= "_blank"> ${
-      top10less[i].last_name
-    }, ${top10less[i].first_name} ${top10less[i].middle_name || " "}</a>`;
-    // || if there is no middle name display empty
-    missed_votes.innerHTML = top10less[i].missed_votes;
-    missed_votes_pct.innerHTML = top10less[i].missed_votes_pct + "%";
+//   let tenPercentage = Math.round((sortedList.length * 10) / 100);
 
-    row.append(name, missed_votes, missed_votes_pct);
-    tbody.append(row);
-  }
-}
+//   for (let i = 0; i < sortedList.length; i++) {
+//     //function to sort array from min to max missed vote %
+
+//     if (i < tenPercentage) {
+//       top10array.push(sortedList[i]); // with the push I populate the top10least with my results
+//     } else if (
+//       top10array[top10array.length - 1].missed_votes_pct == // i want to compare the last one of the top10 with the followin one to check if its a duplicate
+//       sortedList[i].missed_votes_pct
+//     ) {
+//       top10array.push(sortedList[i]);
+//     } else {
+//       break; // once it finds duplicate the loop has to stop running
+//     }
+//   }
+// }

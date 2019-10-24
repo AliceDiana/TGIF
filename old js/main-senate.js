@@ -43,7 +43,7 @@ function loaderHide() {
 }
 
 function generateTable(membersArray) {
-  var tbody = document.getElementById("senate-data");
+  var tbody = document.getElementById("data");
 
   for (var i = 0; i < membersArray.length; i++) {
     let row = document.createElement("tr");

@@ -1,5 +1,5 @@
 header {
-  overflow: visible;
+  width: max;
 }
 
 .logo {
@@ -9,6 +9,11 @@ header {
 
 .email {
   margin-top: 52px;
+  height: 20px;
+}
+
+a:hover.email {
+  background-color: white;
 }
 
 .far.fa-envelope {
@@ -30,15 +35,15 @@ p {
   text-indent: 30px;
 }
 
-main {
-  margin-bottom: 200px;
-}
 footer {
   height: 50px;
-  margin-bottom: 4px;
 }
 .copyright {
   margin-top: -7px;
+}
+
+main {
+  margin-bottom: 10px;
 }
 
 #more {
