@@ -29,7 +29,7 @@ fetch(url, {
 
   .then(data => {
     // I get the data I need
-    membersArray = data.results[0].members; // I give the directions on how to acess the specific member array
+    membersArray = data.results[0].members; // I give the directions on how to access the specific member array
     init(); // I call the init, which basically is linked the init function
   })
   .catch(error => {
@@ -46,7 +46,7 @@ function init() {
 }
 
 function loaderShow() {
-  document.querySelector("main").style.display = "none"; //I select my main conten, and I want to hide it while the loader is on
+  document.querySelector("main").style.display = "none"; //I select my main content, and I want to hide it while the loader is on
   document.getElementById("spinner"); // I want the loader to appear
 }
 
@@ -56,10 +56,10 @@ function loaderHide() {
 }
 
 function generateTable(membersArray) {
-  var tbody = document.getElementById("data"); // I want to build my table insde the html with id=name
+  var tbody = document.getElementById("data"); // I want to build my table inside the html with id=name
 
   for (var i = 0; i < membersArray.length; i++) {
-    // create the row and cells for the whole lenght of my membersarray
+    // create the row and cells for the whole length of my membersarray
     let row = document.createElement("tr"); // create one row
     let name = document.createElement("td"); //create 5 cells
     let party = document.createElement("td");
@@ -70,7 +70,7 @@ function generateTable(membersArray) {
     name.innerHTML = `<a href= "${membersArray[i].url}" target= "_blank"> ${
       membersArray[i].last_name
     }, ${membersArray[i].first_name} ${membersArray[i].middle_name || " "}</a>`;
-    // I use ${} to link the respective url to the memebers
+    // I use ${} to link the respective url to the members
     //  ||  means that if there is no middle name display empty
     party.innerHTML = membersArray[i].party; // populate this cell with the values party
     state.innerHTML = membersArray[i].state;
@@ -87,16 +87,16 @@ function filterItems(itemsToFilter) {
   // the function filterItems is my secondary function, and aims at budiling and using the checkboxes for the party filter
 
   // let checkBoxes = document.querySelectorAll("input.party-checkbox");
-  let checkboxDemocrat = document.getElementById("Democrats"); //  create some varibales to know at which part (ids) of my HTML i am referring to
+  let checkboxDemocrat = document.getElementById("Democrats"); //  create some variables to know at which part (ids) of my HTML i am referring to
   let checkboxRepublicans = document.getElementById("Republicans");
   let checkboxIndependents = document.getElementById("Independents");
 
-  checkboxRepublicans.addEventListener("click", changecountry); // I add the event click to my checkbo  and with "changecountry" I link the chckboxes to my primary function for countrylist
+  checkboxRepublicans.addEventListener("click", changecountry); // I add the event click to my checkbox and with "changecountry" I link the checkboxes to my primary function for countrylist
   checkboxDemocrat.addEventListener("click", changecountry); //  (it is like a chain, I have to link the filters only to the primary function)
   checkboxIndependents.addEventListener("click", changecountry);
 
   for (var i = 0; i < itemsToFilter.length; i++) {
-    itemsToFilter[i].style.display = "none"; // I do not want to have the row exposed, at first everyhting is blanked
+    itemsToFilter[i].style.display = "none"; // I do not want to have the row exposed, at first everything is blanked
     // then, when a checkbox is checked,
     if (
       checkboxRepublicans.checked && // if my checkboxRepublicans is checked, and the data-party attribute is equal to R
@@ -123,18 +123,18 @@ function dropdownfilter(members) {
   let countryList = []; // I create  a new array to be populated with loop results
 
   for (let i = 0; i < members.length; i++) {
-    //for the whole lis of members
+    //for the whole list of members
     countryList.push(members[i].state); //push into the countrylist array, the state value
   }
 
-  let uniqueCountryArray = [...new Set(countryList)].sort(); // I have an Array witht the whole list of states, but I onlu want the unique states without duplicates
-  // With new Set I get the unique values. However if I use Set I have to transform the array into a readable by Javascript.
+  let uniqueCountryArray = [...new Set(countryList)].sort(); // I have an Array with the whole list of states, but I only want the unique states without duplicates
+  // With new Set I get the unique values. However if I use Set I have to transform the array into a readable by JavaScript.
   // Therefore I use [...] to create a new array and the dots to copy the content
 
   let select = document.getElementById("countrydropdown"); // I define where in my html i want to insert my list (id countrydropdown)
 
   for (i = 0; i < uniqueCountryArray.length; i++) {
-    // I build my dropdown in HTMl. For the whole lenght of my state array, I want to create rows in my dropdown list
+    // I build my dropdown in HTMl. For the whole length of my state array, I want to create rows in my dropdown list
     let option = document.createElement("option");
 
     option.setAttribute("value", uniqueCountryArray[i]); // I want to set an attribute  "value" to my options and name the value with the state

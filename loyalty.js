@@ -44,7 +44,7 @@ fetch(url, {
 
   .then(data => {
     // I get the data I need
-    membersArray = data.results[0].members; // I give the directions on how to acess the specific member array
+    membersArray = data.results[0].members; // I give the directions on how to access the specific member array
     init(); // I call the init, which basically is linked the init function
   })
   .catch(error => {
@@ -66,7 +66,7 @@ function init() {
 }
 
 function loaderShow() {
-  document.querySelector("main").style.display = "none"; //I select my main conten, and I want to hide it while the loader is on
+  document.querySelector("main").style.display = "none"; //I select my main content, and I want to hide it while the loader is on
   document.getElementById("spinner"); // I want the loader to appear
 }
 
@@ -94,7 +94,7 @@ function partyMembers() {
     statistics.Republicans + statistics.Democrats + statistics.Independents;
 }
 
-// code to get the averge of vote % for each party
+// code to get the average of vote % for each party
 
 function totalPercentage() {
   // code to get the total of the vote % for each party
@@ -110,7 +110,7 @@ function totalPercentage() {
       sumOfPercentage.Independents += membersArray[i].votes_with_party_pct;
     }
   }
-  sumOfPercentage.Total = // for the republicans, the average vote% is equal to the total percenage for Republicans / the number of republican members
+  sumOfPercentage.Total = // for the republicans, the average vote% is equal to the total percentage for Republicans / the number of republican members
     sumOfPercentage.Republicans +
     sumOfPercentage.Democrats +
     sumOfPercentage.Independents;
@@ -150,7 +150,7 @@ function generateTable(top10list, tbody) {
     let votes_with_party_pct = document.createElement("td");
 
     name.innerHTML = `<a href= "${top10list[i].url}" target= "_blank"> ${
-      top10list[i].last_name // I use ${} to link the respective url to the memebers
+      top10list[i].last_name // I use ${} to link the respective url to the members
     }, ${top10list[i].first_name} ${top10list[i].middle_name || " "}</a>`;
     // ||  means that if there is no middle name display empty
     total_votes.innerHTML = top10list[i].total_votes;
@@ -169,7 +169,7 @@ function lessLoyal() {
     return a.votes_with_party_pct - b.votes_with_party_pct;
   });
 
-  let tenPercentage = Math.round((sortedListLoyalty.length * 10) / 100); // I define the 10% of my aray
+  let tenPercentage = Math.round((sortedListLoyalty.length * 10) / 100); // I define the 10% of my array
 
   for (let i = 0; i < sortedListLoyalty.length; i++) {
     if (i < tenPercentage) {

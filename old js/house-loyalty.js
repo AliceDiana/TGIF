@@ -85,7 +85,7 @@ function partyMembers() {
 }
 
 function totalPercentage() {
-  // code to get the totale of vote % for each party
+  // code to get the total of vote % for each party
 
   for (var i = 0; i < membersArray.length; i++) {
     if (membersArray[i].party === "R") {
@@ -144,7 +144,7 @@ function lessLoyal() {
     if (i < tenPercentage) {
       top10less.push(sortedListLoyalty[i]); // with the push I populate the top10least with my results
     } else if (
-      top10less[top10less.length - 1].votes_with_party_pct == // i want to compare the last one of the top10 with the followin one to check if its a duplicate
+      top10less[top10less.length - 1].votes_with_party_pct == // i want to compare the last one of the top10 with the following one to check if its a duplicate
       sortedListLoyalty[i].votes_with_party_pct
     ) {
       top10less.push(sortedListLoyalty[i]);
@@ -170,7 +170,7 @@ function mostLoyal() {
     if (i < tenPercentage) {
       top10most.push(reversedListLoyalty[i]); // with the push I populate the top10least with my results
     } else if (
-      top10most[top10most.length - 1].votes_with_party_pct == // i want to compare the last one of the top10 with the followin one to check if its a duplicate
+      top10most[top10most.length - 1].votes_with_party_pct == // i want to compare the last one of the top10 with the following one to check if its a duplicate
       reversedListLoyalty[i].votes_with_party_pct
     ) {
       top10most.push(reversedListLoyalty[i]);
